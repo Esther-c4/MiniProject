@@ -4,7 +4,6 @@ let age = document.getElementById("age")
 let email = document.getElementById("email")
 let date = document.getElementById("date")
 let time = document.getElementById("time")
-let valid = true
 let minor = document.getElementById("minor")
 let h2 = document.getElementById("h1")
 let para = document.getElementById("para")
@@ -12,7 +11,6 @@ let artist = localStorage.getItem("artist")
 let sub = document.getElementById("sub")
 h1.innerHTML = `${artist} Concert`
 concert = 0
-let bill = 200
 
 let zErr = document.getElementById("zErr")
 let aErr = document.getElementById("aErr")
@@ -26,7 +24,8 @@ let iErr = document.getElementById("iErr")
 
 document.getElementById('form').addEventListener("submit", function (e) {
     e.preventDefault()
-
+    let bill = 200
+    let valid = true
     if (user.value == "") {
         aErr.innerHTML = 'Enter your fullname'
         valid = false
@@ -36,7 +35,7 @@ document.getElementById('form').addEventListener("submit", function (e) {
     if (age.value == "") {
         bErr.innerHTML = 'Enter your Age'
         valid = false
-    } else if (age < 18) {
+    } else if (age < '18') {
         bErr.innerHTML = ''
         if (minor.value == '') {
             zErr.innerHTML = "Enter Guidance's Name"
@@ -48,10 +47,10 @@ document.getElementById('form').addEventListener("submit", function (e) {
         bErr.innerHTML = ""
         zErr.innerHTML = ""
     }
-    if (email.value === ""){
+    if (email.value === "") {
         dErr.innerHTML = 'please enter an email address';
-    valid = false;
-    }else{
+        valid = false;
+    } else {
         dErr.textContent = '';
     }
     if (date.value == "") {
@@ -69,28 +68,30 @@ document.getElementById('form').addEventListener("submit", function (e) {
     if (select1.value == "") {
         gErr.innerHTML = 'Select an option'
         valid = false
-    } else{ 
+    } else {
         gErr.innerHTML = ""
-    if(select1.value == '1'){
-        bill += 100
-    }else{
-        bill += 200
-    }
+        if (select1.value == '1') {
+            bill += 100
+        } else {
+            bill += 200
+            //console.log('bill')
+        }
     }
     if (select2.value == "") {
         hErr.innerHTML = 'Select an option'
         valid = false
     } else {
         hErr.innerHTML = ""
-        if(select2.value == '1'){
+        if (select2.value == '1') {
             bill += 100
-        }else{
+        } else {
             bill += 200
         }
     }
     if (select3.value == "") {
         iErr.innerHTML = 'Select an option'
         valid = false
+        //console.log('logg')
     } else if (select3.value == '0') {
         alert('No event for this date')
         valid = false
@@ -98,24 +99,18 @@ document.getElementById('form').addEventListener("submit", function (e) {
     else {
         iErr.innerHTML = ''
     }
-    if(!valid){
-        console.log('error in connection')
-    }else{
-        localStorage.setItem('logged_in_user', username)
-        window.location.href = "services.html";
-    }
-    document.getElementById('form').reset();
-
-
+    if (!valid) {
+     console.log('error in connection')
+     }else{
+    localStorage.setItem('logged_in_user', user.value)
+    localStorage.setItem("age", age.value)
+    localStorage.setItem('bill', bill)
+    window.location.href = "services.html";  
+    console.log(bill)
+     }
+        // document.getElementById('form').reset();
 })
 
-// if (points >= 30){  if (form = '')
-//     para.innerHTML= 'CONGRATULATION YOU ARE QUALIFIED FOR THE LOAN'
-//     console.log('CONGRATULATION YOU ARE QUALIFIED FOR THE LOAN')
-//     }
-//     else{
-//         para.innerHTML= 'TRY AGAIN'
-//         console.log('TRY AGAIN')
 if (artist == 'Ballet') {
     document.getElementById('select3').innerHTML = `
                 <option value="">Select option</option>

@@ -1,2 +1,11 @@
-let para = document.getElementById("para")
+let  para = document.getElementById("para")
+//let dob = document.getElementById("age")
+let h1 = document.getElementById("h1")
+let price = document.getElementById("price")
+let bill = localStorage.getItem('bill')
 let username = localStorage.getItem('logged_in_user')
+let age = localStorage.getItem("age")
+price.innerHTML = `Total Price: $${bill}`
+para.innerHTML = `Customer Name: ${username}`
+h1.innerHTML = `Booking  Successful`
+//dob.innerHTML = `Customer age: ${age}`
